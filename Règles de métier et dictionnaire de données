@@ -1,0 +1,97 @@
+ii.	Les règles de métier
+
+Les règles métiers principales de notre MCD sont les suivantes : 
+
+•	Un fournisseur propose plusieurs parfums.
+•	Un parfum peut provenir de plusieurs fournisseurs officiels.
+•	Un manager est toujours un employé (association récursive).
+•	Un magasin est dirigé par un seul manager, mais emploie plusieurs personnes.
+•	Chaque employé travaille dans un seul magasin, mais un magasin a plusieurs employés.
+•	Un client peut passer plusieurs commandes, une commande appartient à un seul client.
+•	Un client peut commander en ligne ou en boutique.
+•	Chaque commande est composée d’un ou plusieurs détails commande, chacun liant un parfum et sa quantité.
+•	Une promotion peut être générale ou spécifique (anniversaire client).
+•	Une promotion peut concerner plusieurs parfums, et un parfum peut être concerné par plusieurs promotions.
+•	L’historique des prix est maintenu à travers les promotions et les mouvements de stock.
+•	Les stocks sont mis à jour via l’association n-aire STOCKER (parfum, magasin, opération).
+•	Les achats fournisseurs alimentent le stock (entrées), les ventes le réduisent (sorties).
+
+
+
+iii.	Le dictionnaire de données
+
+Objet                                                                                      Description	                                                                        Contraintes
+
+Prix actuel	                                                                    Prix de vente actuel du parfum	                                                                Doit être ≥ 0 
+
+Quantité	                                                         Quantité de produits dans une commande ou un mouvement	                                                     Entier positif
+
+Taux réduction	                                                               Pourcentage de remise appliqué	                                                                 Entre 0 et 100
+
+Canal	                                                                            Mode d’achat du client	                                                            Valeurs : “En ligne” ou “Boutique”
+
+ID_Manager	                                                               Identifiant du supérieur hiérarchique                                                  	Peut-être NULL si l’employé est manager
+
+Date_Naissance / Date_inscription	                                      Présentes uniquement pour les clients en ligne                                                             	NULL
+
+Montant_Total	                                                       Montant total d’une commande ou d’un achat fournisseur	                                        Calculé à partir des détails associés
+
+Type_Opération	                                                                Type d’opération effectuée	                                        Valeurs : “Entrée” (achat fournisseur), “Sortie” (vente)
+
+
+
+
+
+
+
+
+
+
+
+
+•	ENTITES PRINCIPALES ET ATTRIBUTS
+
+Entité	Attributs (Nom / Type / Description)
+PARFUM	id_parfum (Identifiant), nom_parfum (Texte), categorie (Texte : eau de parfum, eau de toilette…), genre (Texte : homme/femme/unisexe), prix_actuel (Décimal), description (Texte)
+
+FOURNISSEUR	id_fournisseur (Identifiant), nom_fournisseur (Texte), adresse (Texte), telephone (Texte), email (Texte)
+
+ACHAT_FOURNISSEUR	id_achat (Identifiant), date_achat (Date), montant_total (Décimal)
+
+MAGASIN	id_magasin (Identifiant), nom_magasin (Texte), adresse_magasin (Texte)
+
+EMPLOYE	id_employe (Identifiant), nom (Texte), prenom (Texte), poste (Texte), salaire (Décimal), id_manager (FK vers EMPLOYE)
+
+CLIENT	id_client (Identifiant), nom (Texte), prenom (Texte), adresse (Texte), email (Texte), telephone (Texte), date_naissance (Date, nullable), date_inscription (Date, nullable)
+
+COMMANDE	id_commande (Identifiant), date_commande (Date), canal (Enum: "Boutique" / "En ligne"), montant_total (Décimal)
+
+DETAIL_COMMANDE (entité faible)	quantite (Entier), prix_unitaire (Décimal)
+
+PROMOTION	id_promo (Identifiant), type_promo (Texte: saisonnière, anniversaire…), date_debut (Date), date_fin (Date), taux_reduction (Décimal)
+
+STOCKER (association n-aire)	id_mvt (Identifiant), type_mvt (Entrée/Sortie), quantite (Entier), date_mvt (Date)
+
+
+
+
+
+•	CARDINALITES
+
+Association	                                                                                Entités concernées	                                                               Cardinalités
+
+PROPOSE                                                                                  	FOURNISSEUR – PARFUM	                                                               (1,n) – (0,n)
+
+ACHAT_DETAIL	                                                                          ACHAT_FOURNISSEUR – PARFUM	                                                           (1,n) – (1,n)
+
+GERER (récursive)                                                                           EMPLOYE – EMPLOYE	                                                                 (1,1) – (0,n)
+
+TRAVAILLER	                                                                                EMPLOYE – MAGASIN	                                                                 (1,n) – (1,1)
+
+PASSER	                                                                                    CLIENT – COMMANDE	                                                                 (1,1) – (0,n)
+
+DETAIL_COMMANDE (entité faible)	                                                            COMMANDE – PARFUM	                                                                 (1,n) – (1,n)
+
+AFFECTER	                                                                                  PROMOTION – PARFUM	                                                               (1,n) – (0,n)
+
+STOCKER (n-aire)	                                                                      PARFUM – MAGASIN – OPERATION	                                                      (1,n) – (1,n) – (1,n)
