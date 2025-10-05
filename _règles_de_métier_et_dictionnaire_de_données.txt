@@ -20,23 +20,23 @@ Les règles métiers principales de notre MCD sont les suivantes :
 
 iii.	Le dictionnaire de données
 
-Objet                                                                                      Description	                                                                        Contraintes
+Objet                                                                       Description	                                         Contraintes
 
-Prix actuel	                                                                    Prix de vente actuel du parfum	                                                                Doit être ≥ 0 
+Prix actuel	                                                       Prix de vente actuel du parfum	                              Doit être ≥ 0
 
-Quantité	                                                         Quantité de produits dans une commande ou un mouvement	                                                     Entier positif
+Quantité	                                              Quantité de produits dans une commande ou un mouvement	                Entier positif
 
-Taux réduction	                                                               Pourcentage de remise appliqué	                                                                 Entre 0 et 100
+Taux réduction	                                                    Pourcentage de remise appliqué	                             Entre 0 et 100
 
-Canal	                                                                            Mode d’achat du client	                                                            Valeurs : “En ligne” ou “Boutique”
+Canal	                                                                    Mode d’achat du client	                      Valeurs : “En ligne” ou “Boutique”
 
-ID_Manager	                                                               Identifiant du supérieur hiérarchique                                                  	Peut-être NULL si l’employé est manager
+ID_Manager	                                                     Identifiant du supérieur hiérarchique 	            Peut-être NULL si l’employé est manager
 
-Date_Naissance / Date_inscription	                                      Présentes uniquement pour les clients en ligne                                                             	NULL
+Date_Naissance / Date_inscription	                           Présentes uniquement pour les clients en ligne                          	NULL
 
-Montant_Total	                                                       Montant total d’une commande ou d’un achat fournisseur	                                        Calculé à partir des détails associés
+Montant_Total	                                             Montant total d’une commande ou d’un achat fourni         Calculé à partir des détails associés
 
-Type_Opération	                                                                Type d’opération effectuée	                                        Valeurs : “Entrée” (achat fournisseur), “Sortie” (vente)
+Type_Opération	                                                    Type d’opération effectuées  |  Valeurs : “Entrée” (achat fournisseur), “Sortie” (vente)
 
 
 
@@ -78,20 +78,20 @@ STOCKER (association n-aire)	id_mvt (Identifiant), type_mvt (Entrée/Sortie), qu
 
 •	CARDINALITES
 
-Association	                                                                                Entités concernées	                                                               Cardinalités
+Association                                Entités concernées	                                                               Cardinalités
 
-PROPOSE                                                                                  	FOURNISSEUR – PARFUM	                                                               (1,n) – (0,n)
+PROPOSE                                 	FOURNISSEUR – PARFUM	                                                                (1,n) – (0,n)
 
-ACHAT_DETAIL	                                                                          ACHAT_FOURNISSEUR – PARFUM	                                                           (1,n) – (1,n)
+ACHAT_DETAIL	                          ACHAT_FOURNISSEUR – PARFUM	                                                            (1,n) – (1,n)
 
-GERER (récursive)                                                                           EMPLOYE – EMPLOYE	                                                                 (1,1) – (0,n)
+GERER (récursive)                           EMPLOYE – EMPLOYE	                                                                  (1,1) – (0,n)
 
-TRAVAILLER	                                                                                EMPLOYE – MAGASIN	                                                                 (1,n) – (1,1)
+TRAVAILLER	                                EMPLOYE – MAGASIN	                                                                  (1,n) – (1,1)
 
-PASSER	                                                                                    CLIENT – COMMANDE	                                                                 (1,1) – (0,n)
+PASSER	                                    CLIENT – COMMANDE	                                                                  (1,1) – (0,n)
 
-DETAIL_COMMANDE (entité faible)	                                                            COMMANDE – PARFUM	                                                                 (1,n) – (1,n)
+DETAIL_COMMANDE (entité faible)	            COMMANDE – PARFUM	                                                                  (1,n) – (1,n)
 
-AFFECTER	                                                                                  PROMOTION – PARFUM	                                                               (1,n) – (0,n)
+AFFECTER	                                   PROMOTION – PARFUM	                                                                (1,n) – (0,n)
 
-STOCKER (n-aire)	                                                                      PARFUM – MAGASIN – OPERATION	                                                      (1,n) – (1,n) – (1,n)
+STOCKER (n-aire)	                        PARFUM – MAGASIN – OPERATION	                                                     (1,n) – (1,n) – (1,n)
