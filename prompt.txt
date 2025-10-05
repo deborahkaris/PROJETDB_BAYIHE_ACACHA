@@ -1,0 +1,21 @@
+I.	Première étape : Analyse des besoins
+
+i.	Prompt final utilisé
+
+Agit en tant que spécialiste en base de données, et génère un MCD (Modèle Conceptuel de Données) complet en français sur la gestion d’une parfumerie qui commercialise des parfums accessibles à tout type de classe sociale. 
+Les parfums sont commandés chez des fournisseurs officiels, qui ont des produits de différentes catégories (eau de parfum, parfum, etc …) pour homme comme femme. 
+Des commandes sont effectuées à des dates précises, et les produits avec leurs différents montants sont bien structurés. 
+Cette parfumerie détient plusieurs magasins avec différentes adresses. Chaque magasin a un manager qui gère plusieurs employés. 
+Les clients ont la possibilité d’effectuer leurs achats en boutique mais peuvent aussi commander en ligne à travers le site web de la boutique. 
+Chaque client doit être distingué par son nom, son prénom, son adresse, son e-mail, son numéro de téléphone, (sa date de naissance et sa date d’inscription pour ceux qui commandent à travers le site). 
+Chaque commande doit avoir des détails traçables incluant le montant total dépensé par un client. 
+A certaines périodes de l’année des promotions sont faites sur l’ensemble des produits présents en stock, mais une promotion exceptionnelle est faite à des clients le jour de leurs anniversaires. 
+On doit pouvoir avoir un historique des changements de prix au cours de l’année du aux différentes promotions appliquées. 
+On doit pouvoir retracer de façon claire, nette et concise la gestion des stocks de parfums déjà vendus et ceux encore disponibles, les achats faits chez le fournisseur, les commandes effectuées en ligne et en boutique, le nombre de produits entrant et sortant par jour. 
+Le modèle doit : scrupuleusement respecter la 3ème forme normale (3FN), contenir ces éléments de modélisation avancée : Une association récursive (L’association récursive concerne la hiérarchie entre employés et manager, une association n-aire (n = 3), et une entité faible. 
+Il ne doit pas contenir plus de 9 entités car le MCD ne doit pas être trop lourd, mais concis et cohérent.
+Tu peux t’inspirer de ce lien appartenant à la maison Sephora, qui est une maison qui propose des produits de beauté, mais il n’y a que le coin parfumerie qui m’intéresse : https://www.sephora.fr
+Présente les entités principales avec leurs différents attributs, et le type des attributs dans un tableau compréhensibles. Les associations doivent être nommées clairement, avec des cardinalités cohérentes (1,1 – 0,n – 1,n – etc.). 
+N’oublie surtout pas les règles métiers, et le dictionnaire de données.
+En conclusion conçois un MCD capable d’organiser les opérations possibles dans une parfumerie.
+
